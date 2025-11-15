@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const conditions = [
   {
@@ -306,9 +307,12 @@ Papulopustular eruption around mouth/nose/eyes; often triggered by topical stero
   },
 ];
 
-
 const Dermatology = () => {
   const [expanded, setExpanded] = useState<number | null>(null);
+
+  const toggleCard = (index: number) => {
+    setExpanded((current) => (current === index ? null : index));
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -338,30 +342,65 @@ const Dermatology = () => {
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {conditions.map((condition, index) => (
-                <Card
-                  key={index}
-                  className="hover:shadow-lg transition-shadow duration-300 cursor-pointer"
-                  onClick={() => setExpanded(expanded === index ? null : index)}
-                >
-                  <CardHeader>
-                    <CardTitle className="text-lg text-sage-dark">
-                      {condition.name}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {condition.description}
-                    </p>
+              {conditions.map((condition, index) => {
+                const isOpen = expanded === index;
+                return (
+                  <Card
+                    key={index}
+                    className={`relative flex flex-col h-full border border-sage-light/60 bg-white/90 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer ${
+                      isOpen ? "ring-2 ring-sage-dark ring-offset-1" : ""
+                    }`}
+                    onClick={() => toggleCard(index)}
+                  >
+                    <CardHeader className="pb-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <CardTitle className="text-lg font-semibold text-sage-dark">
+                            {condition.name}
+                          </CardTitle>
+                          <p className="text-xs uppercase tracking-wide text-muted-foreground/80 mt-1">
+                            Dermatology care
+                          </p>
+                        </div>
+                        <div className="mt-1 shrink-0 rounded-full bg-sage-light p-1.5">
+                          {isOpen ? (
+                            <ChevronUp className="w-4 h-4 text-sage-dark" />
+                          ) : (
+                            <ChevronDown className="w-4 h-4 text-sage-dark" />
+                          )}
+                        </div>
+                      </div>
+                    </CardHeader>
 
-                    {expanded === index && condition.fullText && (
-                      <p className="text-sm text-gray-700 mt-2 transition-all duration-300 ease-in-out whitespace-pre-wrap">
-                        {condition.fullText}
+                    <CardContent className="pt-0">
+                      <p className="text-sm text-muted-foreground mb-2">
+                        {condition.description}
                       </p>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
+
+                      <div
+                        className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+                          isOpen ? "max-h-[1000px] opacity-100 mt-3" : "max-h-0 opacity-0"
+                        }`}
+                      >
+                        <div
+                          className="rounded-md bg-sage-light/40 px-3 py-3 text-sm"
+                        >
+                          <div
+                            className="
+                              prose prose-sm max-w-none text-gray-800 
+                              prose-strong:text-charcoal 
+                              prose-em:text-charcoal 
+                              prose-p:my-2 prose-li:my-1
+                            "
+                            style={{ whiteSpace: "pre-line" }}
+                            dangerouslySetInnerHTML={{ __html: condition.fullText }}
+                          />
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
 
             <div className="bg-sage-light p-8 rounded-lg text-center">
