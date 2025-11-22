@@ -74,7 +74,7 @@ const Contact = () => {
 
                 <Button variant="cta" className="w-full" asChild>
                   <a 
-                    href="https://www.hotdoc.com.au" 
+                    href="https://www.hotdoc.com.au/medical-centres/fitzroy-north-VIC-3068/fitzroy-north-medical-clinic/doctors/dr-premila-hewage-skin-checks" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2"
@@ -153,7 +153,7 @@ const Contact = () => {
 
                 <Button variant="cta" className="w-full" asChild>
                   <a 
-                    href="https://www.hotdoc.com.au/medical-centres/fitzroy-north-VIC-3068/fitzroy-north-medical-clinic/doctors/dr-premila-hewage-skin-checks" 
+                    href="https://www.hotdoc.com.au/medical-centres/hawthorn-east-VIC-3123/hawthorn-east-medical-aesthetic-clinic/doctors/dr-premila-hewage-women-s-health-menopause" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2"
