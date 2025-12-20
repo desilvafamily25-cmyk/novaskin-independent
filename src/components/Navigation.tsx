@@ -11,6 +11,7 @@ const Navigation = () => {
     { name: "Home", path: "/" },
     { name: "Skin Cancer Checks", path: "/skin-checks" },
     { name: "Dermatology", path: "/dermatology" },
+    { name: "Skin Care", path: "/skin-care" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
