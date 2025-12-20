@@ -1,10 +1,18 @@
 import { useState } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowRight, X } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const conditions = [
   {
@@ -310,10 +318,6 @@ Papulopustular eruption around mouth/nose/eyes; often triggered by topical stero
 const Dermatology = () => {
   const [expanded, setExpanded] = useState<number | null>(null);
 
-  const toggleCard = (index: number) => {
-    setExpanded((current) => (current === index ? null : index));
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <Navigation />
@@ -341,67 +345,80 @@ const Dermatology = () => {
               Conditions We Treat
             </h2>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {conditions.map((condition, index) => {
-                const isOpen = expanded === index;
-                return (
-                  <Card
-                    key={index}
-                    className={`relative flex flex-col h-full border border-sage-light/60 bg-white/90 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer ${
-                      isOpen ? "ring-2 ring-sage-dark ring-offset-1" : ""
-                    }`}
-                    onClick={() => toggleCard(index)}
-                  >
-                    <CardHeader className="pb-3">
-                      <div className="flex items-start justify-between gap-2">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-12">
+              {conditions.map((condition, index) => (
+                <Card
+                  key={index}
+                  className="group relative border border-sage/30 bg-card hover:border-sage-dark/50 shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer"
+                  onClick={() => setExpanded(index)}
+                >
+                  <CardContent className="p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-base font-semibold text-sage-dark group-hover:text-primary transition-colors">
+                          {condition.name}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mt-1.5 line-clamp-2">
+                          {condition.description}
+                        </p>
+                      </div>
+                      <div className="shrink-0 mt-0.5 rounded-full bg-sage-light/60 p-2 group-hover:bg-sage transition-colors">
+                        <ArrowRight className="w-4 h-4 text-sage-dark group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            {/* Modal for condition details */}
+            <Dialog open={expanded !== null} onOpenChange={(open) => !open && setExpanded(null)}>
+              <DialogContent className="max-w-2xl max-h-[85vh] p-0 gap-0 border-sage/30">
+                {expanded !== null && (
+                  <>
+                    <DialogHeader className="px-6 pt-6 pb-4 border-b border-sage-light/50 bg-sage-light/30">
+                      <div className="flex items-start justify-between">
                         <div>
-                          <CardTitle className="text-lg font-semibold text-sage-dark">
-                            {condition.name}
-                          </CardTitle>
-                          <p className="text-xs uppercase tracking-wide text-muted-foreground/80 mt-1">
-                            Dermatology care
+                          <p className="text-xs uppercase tracking-wider text-sage-dark/70 font-medium mb-1">
+                            Dermatology Care
+                          </p>
+                          <DialogTitle className="text-2xl font-bold text-charcoal">
+                            {conditions[expanded].name}
+                          </DialogTitle>
+                          <p className="text-sm text-muted-foreground mt-2">
+                            {conditions[expanded].description}
                           </p>
                         </div>
-                        <div className="mt-1 shrink-0 rounded-full bg-sage-light p-1.5">
-                          {isOpen ? (
-                            <ChevronUp className="w-4 h-4 text-sage-dark" />
-                          ) : (
-                            <ChevronDown className="w-4 h-4 text-sage-dark" />
-                          )}
-                        </div>
                       </div>
-                    </CardHeader>
-
-                    <CardContent className="pt-0">
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {condition.description}
-                      </p>
-
-                      <div
-                        className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-                          isOpen ? "max-h-[1000px] opacity-100 mt-3" : "max-h-0 opacity-0"
-                        }`}
-                      >
+                    </DialogHeader>
+                    <ScrollArea className="max-h-[55vh]">
+                      <div className="px-6 py-5">
                         <div
-                          className="rounded-md bg-sage-light/40 px-3 py-3 text-sm"
-                        >
-                          <div
-                            className="
-                              prose prose-sm max-w-none text-gray-800 
-                              prose-strong:text-charcoal 
-                              prose-em:text-charcoal 
-                              prose-p:my-2 prose-li:my-1
-                            "
-                            style={{ whiteSpace: "pre-line" }}
-                            dangerouslySetInnerHTML={{ __html: condition.fullText }}
-                          />
-                        </div>
+                          className="prose prose-sm max-w-none text-foreground 
+                            prose-strong:text-charcoal prose-strong:font-semibold
+                            prose-em:text-charcoal/80
+                            prose-p:my-3 prose-li:my-0.5
+                            prose-headings:text-charcoal prose-headings:font-semibold
+                            [&_strong]:block [&_strong]:mt-5 [&_strong]:mb-2 [&_strong]:text-sm [&_strong]:uppercase [&_strong]:tracking-wide [&_strong]:text-sage-dark"
+                          style={{ whiteSpace: "pre-line" }}
+                          dangerouslySetInnerHTML={{ __html: conditions[expanded].fullText }}
+                        />
                       </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
+                    </ScrollArea>
+                    <div className="px-6 py-4 border-t border-sage-light/50 bg-muted/30">
+                      <div className="flex items-center justify-between">
+                        <p className="text-xs text-muted-foreground italic">
+                          Information for general education only
+                        </p>
+                        <Button variant="cta" size="sm" asChild>
+                          <Link to="/contact">Book Consultation</Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </DialogContent>
+            </Dialog>
 
             <div className="bg-sage-light p-8 rounded-lg text-center">
               <p className="text-lg text-foreground mb-4">
