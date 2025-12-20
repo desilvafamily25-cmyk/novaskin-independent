@@ -9,39 +9,42 @@ All colors MUST be HSL.
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 0 0% 20%;
+    --foreground: 0 0% 12%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 20%;
+    --card-foreground: 0 0% 12%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 20%;
+    --popover-foreground: 0 0% 12%;
 
-    --primary: 142 25% 79%;
-    --primary-foreground: 0 0% 20%;
+    --primary: 142 35% 42%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 142 25% 95%;
-    --secondary-foreground: 0 0% 20%;
+    --secondary-foreground: 0 0% 12%;
 
     --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted-foreground: 0 0% 35%;
 
-    --accent: 142 25% 79%;
-    --accent-foreground: 0 0% 20%;
+    --accent: 186 40% 45%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 142 25% 79%;
+    --border: 0 0% 85%;
+    --input: 0 0% 85%;
+    --ring: 142 35% 42%;
 
     --radius: 0.75rem;
     
-    --sage: 142 25% 79%;
-    --sage-light: 142 25% 95%;
-    --sage-dark: 142 30% 45%;
-    --charcoal: 0 0% 20%;
+    --sage: 142 35% 42%;
+    --sage-light: 142 25% 92%;
+    --sage-dark: 142 40% 32%;
+    --charcoal: 0 0% 12%;
+    
+    --teal: 186 40% 45%;
+    --warm: 32 60% 50%;
 
     --sidebar-background: 0 0% 98%;
 
@@ -61,38 +64,42 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 0 0% 12%;
+    --background: 0 0% 10%;
     --foreground: 0 0% 95%;
 
-    --card: 0 0% 15%;
+    --card: 0 0% 13%;
     --card-foreground: 0 0% 95%;
 
-    --popover: 0 0% 15%;
+    --popover: 0 0% 13%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 142 25% 79%;
-    --primary-foreground: 0 0% 20%;
+    --primary: 142 35% 50%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 20%;
+    --secondary: 0 0% 18%;
     --secondary-foreground: 0 0% 95%;
 
-    --muted: 0 0% 20%;
+    --muted: 0 0% 18%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 142 25% 79%;
-    --accent-foreground: 0 0% 20%;
+    --accent: 186 40% 50%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 142 25% 79%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 142 35% 50%;
     
-    --sage: 142 25% 79%;
-    --sage-light: 142 25% 25%;
-    --sage-dark: 142 30% 65%;
+    --sage: 142 35% 50%;
+    --sage-light: 142 25% 22%;
+    --sage-dark: 142 40% 60%;
     --charcoal: 0 0% 95%;
+    
+    --teal: 186 40% 55%;
+    --warm: 32 60% 55%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -109,7 +116,16 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    font-size: 17px;
+  }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
   }
 }
