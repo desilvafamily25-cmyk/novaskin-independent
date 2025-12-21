@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Shield, Droplets, Sun, Sparkles, AlertCircle, Heart, Leaf, FlaskConical, Info, ChevronRight } from "lucide-react";
+import { Shield, Droplets, Sun, Sparkles, AlertCircle, Heart, Leaf, FlaskConical, Info, ChevronRight, ArrowRight, BookOpen, Stethoscope, Calendar, Box } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
+import skincareHero from "@/assets/skincare-hero.jpg";
 
 // Detailed ingredient data
 const ingredientDetails: Record<string, {
@@ -202,6 +204,7 @@ const ingredientDetails: Record<string, {
 
 const SkinCare = () => {
   const [selectedIngredient, setSelectedIngredient] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState("retinoids");
 
   const ingredientCategories = [
     {
@@ -326,139 +329,223 @@ const SkinCare = () => {
     return ingredientDetails[ingredientName] || null;
   };
 
+  // Handle scroll to category
+  const scrollToCategory = (categoryId: string) => {
+    setActiveCategory(categoryId);
+    const element = document.getElementById(`category-${categoryId}`);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  // Track active category on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const categories = ingredientCategories.map(cat => cat.id);
+      for (const catId of categories) {
+        const element = document.getElementById(`category-${catId}`);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 200 && rect.bottom >= 200) {
+            setActiveCategory(catId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       
       <main>
-        {/* Hero Grid Section - Relume Inspired */}
-        <section className="py-8 md:py-12">
+        {/* Hero Section 1: Doctor-led */}
+        <section className="bg-warm/30 py-16 md:py-24">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {/* Main Hero Card */}
-              <div className="lg:col-span-2 bg-charcoal text-white rounded-2xl p-8 md:p-12 flex flex-col justify-between min-h-[300px] md:min-h-[400px]">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="max-w-xl">
+                <span className="inline-block text-charcoal font-semibold text-sm tracking-wide uppercase mb-4">
+                  Doctor-led
+                </span>
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal leading-tight mb-6">
+                  Medical expertise meets patient education
+                </h1>
+                <p className="text-lg text-muted-foreground mb-6">
+                  A doctor built this site to teach you the truth about skin. No marketing hype, just solid dermatology.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-charcoal mt-2.5 shrink-0" />
+                    <span className="text-foreground">Evidence-based information you can trust</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-charcoal mt-2.5 shrink-0" />
+                    <span className="text-foreground">Real solutions for real skin problems</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-charcoal mt-2.5 shrink-0" />
+                    <span className="text-foreground">Direct access to medical guidance</span>
+                  </li>
+                </ul>
+                <div className="flex items-center gap-4">
+                  <Button asChild className="bg-charcoal text-white hover:bg-charcoal/90">
+                    <a href="#ingredients">Learn</a>
+                  </Button>
+                  <a href="/dermatology" className="inline-flex items-center gap-2 text-charcoal font-medium hover:gap-3 transition-all">
+                    More <ChevronRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-warm/50">
+                  <img 
+                    src={skincareHero} 
+                    alt="Professional skincare treatment in a medical clinic" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Hero Section 2: Journey */}
+        <section className="bg-muted/40 py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-12">
+              <span className="inline-block text-muted-foreground font-medium text-sm tracking-wide uppercase mb-4">
+                Journey
+              </span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal mb-4">
+                Your path to clear skin
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Three straightforward steps guide you from knowledge to treatment.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              {/* Step 1 - Large Card */}
+              <div className="bg-charcoal text-white rounded-2xl p-8 flex flex-col justify-between min-h-[320px]">
                 <div>
-                  <span className="inline-block text-sage text-sm font-medium tracking-wide uppercase mb-4">Ingredients</span>
-                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
-                    Understand skin care ingredients
-                  </h1>
-                  <p className="text-lg text-white/80 max-w-xl">
-                    Learn what goes into your products and how each ingredient works.
+                  <span className="inline-block text-sage text-sm font-medium tracking-wide uppercase mb-4">
+                    First
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-bold leading-tight mb-4">
+                    Understand what your skin needs
+                  </h3>
+                  <p className="text-white/80">
+                    Dive into our ingredient library and learn what actually works for your skin type.
                   </p>
                 </div>
-                <div className="mt-6">
-                  <a href="#ingredients" className="inline-flex items-center gap-2 text-sage font-medium hover:gap-3 transition-all">
-                    Explore ingredients <ChevronRight className="w-4 h-4" />
+                <div className="flex items-center gap-4 mt-6">
+                  <Button asChild variant="secondary" className="bg-white text-charcoal hover:bg-white/90">
+                    <a href="#ingredients">Explore</a>
+                  </Button>
+                  <a href="#ingredients" className="inline-flex items-center gap-2 text-white/80 font-medium hover:text-white hover:gap-3 transition-all">
+                    More <ChevronRight className="w-4 h-4" />
                   </a>
                 </div>
               </div>
 
-              {/* Conditions Card */}
-              <div className="bg-sage-light rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-[280px]">
+              {/* Step 2 */}
+              <div className="bg-charcoal/80 text-white rounded-2xl p-8 flex flex-col justify-between min-h-[320px]">
                 <div>
-                  <span className="inline-block text-sage-dark text-sm font-medium tracking-wide uppercase mb-3">Conditions</span>
-                  <h2 className="text-xl md:text-2xl font-bold text-charcoal mb-2">
-                    Explore common skin conditions
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Recognize symptoms and understand what causes your skin issues.
+                  <Box className="w-10 h-10 text-white/60 mb-4" />
+                  <h3 className="text-xl md:text-2xl font-bold leading-tight mb-3">
+                    Identify what's happening with your skin
+                  </h3>
+                  <p className="text-white/70">
+                    Find your condition and understand the science behind it.
                   </p>
                 </div>
-                <a href="/dermatology" className="inline-flex items-center gap-2 mt-4 bg-charcoal text-white px-5 py-2.5 rounded-lg font-medium hover:bg-charcoal/90 transition-colors w-fit">
-                  Learn
-                </a>
+                <Link to="/dermatology" className="inline-flex items-center gap-2 text-white/80 font-medium hover:text-white hover:gap-3 transition-all mt-6">
+                  More <ChevronRight className="w-4 h-4" />
+                </Link>
               </div>
 
-              {/* Appointments Card */}
-              <div className="bg-teal/10 rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-[280px]">
+              {/* Step 3 */}
+              <div className="bg-charcoal/80 text-white rounded-2xl p-8 flex flex-col justify-between min-h-[320px]">
                 <div>
-                  <span className="inline-block text-teal text-sm font-medium tracking-wide uppercase mb-3">Appointments</span>
-                  <h2 className="text-xl md:text-2xl font-bold text-charcoal mb-2">
-                    Book a telehealth appointment
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Talk directly with a doctor for advice tailored to your skin.
+                  <Box className="w-10 h-10 text-white/60 mb-4" />
+                  <h3 className="text-xl md:text-2xl font-bold leading-tight mb-3">
+                    Get a treatment plan from a doctor
+                  </h3>
+                  <p className="text-white/70">
+                    Schedule a telehealth visit for personalized medical guidance.
                   </p>
                 </div>
-                <a href="/contact" className="inline-flex items-center gap-2 mt-4 bg-teal text-white px-5 py-2.5 rounded-lg font-medium hover:bg-teal/90 transition-colors w-fit">
-                  Consult
-                </a>
-              </div>
-
-              {/* Personalized Treatment Card */}
-              <div className="lg:col-span-2 bg-warm/20 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between min-h-[200px] gap-6">
-                <div>
-                  <h2 className="text-xl md:text-2xl font-bold text-charcoal mb-2">
-                    Get personalized treatment plans
-                  </h2>
-                  <p className="text-muted-foreground">
-                    Receive recommendations based on your specific skin condition.
-                  </p>
-                </div>
-                <a href="/contact" className="inline-flex items-center gap-2 bg-warm text-charcoal px-5 py-2.5 rounded-lg font-medium hover:bg-warm/80 transition-colors w-fit shrink-0">
-                  Start
-                </a>
+                <Link to="/contact" className="inline-flex items-center gap-2 text-white/80 font-medium hover:text-white hover:gap-3 transition-all mt-6">
+                  More <ChevronRight className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Trust Section */}
-        <section className="py-12 md:py-16 border-t border-border">
+        {/* Ingredient Categories - Stacked with Left Sidebar */}
+        <section id="ingredients" className="py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-charcoal mb-4">
-                  Medical expertise meets patient education
-                </h2>
-                <p className="text-muted-foreground text-lg">
-                  A doctor built this site to teach you the truth about skin. No marketing hype, just solid dermatology.
-                </p>
-              </div>
-              <ul className="space-y-4">
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-sage mt-2 shrink-0" />
-                  <span className="text-foreground">Evidence-based information you can trust</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-sage mt-2 shrink-0" />
-                  <span className="text-foreground">Real solutions for real skin problems</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="w-2 h-2 rounded-full bg-sage mt-2 shrink-0" />
-                  <span className="text-foreground">Direct access to medical guidance</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* Ingredient Categories - Tabbed Interface */}
-        <section className="py-12 md:py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-bold text-charcoal text-center mb-8">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="text-3xl font-bold text-charcoal text-center mb-12">
                 Skin Care Ingredient Categories
               </h2>
               
-              <Tabs defaultValue="retinoids" className="w-full">
-                <TabsList className="flex flex-wrap justify-center gap-2 h-auto bg-transparent mb-8">
-                  {ingredientCategories.map((category) => (
-                    <TabsTrigger
-                      key={category.id}
-                      value={category.id}
-                      className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground px-4 py-3 rounded-full border border-sage/30 bg-white text-base font-medium transition-all hover:bg-sage-light"
-                    >
-                      <span className="mr-2 text-lg">{category.emoji}</span>
-                      <span className="hidden sm:inline">{category.title}</span>
-                      <span className="sm:hidden">{category.title.split(' ')[0]}</span>
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
+              <div className="flex gap-8">
+                {/* Left Sidebar Navigation */}
+                <nav className="hidden lg:block w-64 shrink-0">
+                  <div className="sticky top-24 space-y-2">
+                    {ingredientCategories.map((category) => (
+                      <button
+                        key={category.id}
+                        onClick={() => scrollToCategory(category.id)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-left transition-all ${
+                          activeCategory === category.id
+                            ? "bg-primary text-primary-foreground font-medium"
+                            : "hover:bg-muted text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        <span className="text-lg">{category.emoji}</span>
+                        <span className="text-sm">{category.title}</span>
+                      </button>
+                    ))}
+                  </div>
+                </nav>
 
-                {ingredientCategories.map((category) => (
-                  <TabsContent key={category.id} value={category.id}>
-                    <Card className="border-sage/20 shadow-lg">
+                {/* Mobile Navigation */}
+                <div className="lg:hidden mb-8 w-full">
+                  <ScrollArea className="w-full">
+                    <div className="flex gap-2 pb-2">
+                      {ingredientCategories.map((category) => (
+                        <button
+                          key={category.id}
+                          onClick={() => scrollToCategory(category.id)}
+                          className={`shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all ${
+                            activeCategory === category.id
+                              ? "bg-primary text-primary-foreground"
+                              : "bg-muted text-muted-foreground hover:bg-muted/80"
+                          }`}
+                        >
+                          <span>{category.emoji}</span>
+                          <span>{category.title.split(' ')[0]}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </ScrollArea>
+                </div>
+
+                {/* Stacked Ingredient Cards */}
+                <div className="flex-1 space-y-12">
+                  {ingredientCategories.map((category) => (
+                    <Card 
+                      key={category.id} 
+                      id={`category-${category.id}`}
+                      className="border-sage/20 shadow-lg scroll-mt-24"
+                    >
                       <CardHeader className="bg-gradient-to-r from-sage-light/40 to-sage-light/20 border-b border-sage/10 py-8">
                         <div className="flex items-center gap-4">
                           <div className="p-3 bg-primary/20 rounded-xl">
@@ -477,7 +564,7 @@ const SkinCare = () => {
                             <FlaskConical className="w-5 h-5" />
                             Common Ingredients
                           </h4>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {category.ingredients.map((ingredient, idx) => {
                               const detail = getIngredientDetail(ingredient);
                               return (
@@ -559,9 +646,9 @@ const SkinCare = () => {
                         </div>
                       </CardContent>
                     </Card>
-                  </TabsContent>
-                ))}
-              </Tabs>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -657,7 +744,7 @@ const SkinCare = () => {
         </Dialog>
 
         {/* Ingredient Selection by Skin Concern */}
-        <section className="py-12 md:py-16">
+        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl font-bold text-charcoal text-center mb-8">
@@ -679,7 +766,7 @@ const SkinCare = () => {
         </section>
 
         {/* Safety and Medical Oversight */}
-        <section className="py-12 md:py-16 bg-muted/30">
+        <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <Card className="border-warm/30 bg-warm/5">
@@ -714,7 +801,7 @@ const SkinCare = () => {
         </section>
 
         {/* Final Note */}
-        <section className="py-12 md:py-16">
+        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center">
               <Card className="border-sage/30 bg-gradient-to-b from-sage-light/20 to-transparent">
