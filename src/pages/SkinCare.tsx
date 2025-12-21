@@ -331,34 +331,104 @@ const SkinCare = () => {
       <Navigation />
       
       <main>
-        {/* Hero Section */}
-        <section className="bg-gradient-to-b from-sage-light/30 to-background py-16 md:py-24">
+        {/* Hero Grid Section - Relume Inspired */}
+        <section className="py-8 md:py-12">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-charcoal mb-6">
-                Skin Care Ingredients: An Educational Guide
-              </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                Evidence-based education about commonly used skin care ingredients, their dermatologic functions, and clinical considerations for optimal skin health.
-              </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* Main Hero Card */}
+              <div className="lg:col-span-2 bg-charcoal text-white rounded-2xl p-8 md:p-12 flex flex-col justify-between min-h-[300px] md:min-h-[400px]">
+                <div>
+                  <span className="inline-block text-sage text-sm font-medium tracking-wide uppercase mb-4">Ingredients</span>
+                  <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-4">
+                    Understand skin care ingredients
+                  </h1>
+                  <p className="text-lg text-white/80 max-w-xl">
+                    Learn what goes into your products and how each ingredient works.
+                  </p>
+                </div>
+                <div className="mt-6">
+                  <a href="#ingredients" className="inline-flex items-center gap-2 text-sage font-medium hover:gap-3 transition-all">
+                    Explore ingredients <ChevronRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Conditions Card */}
+              <div className="bg-sage-light rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-[280px]">
+                <div>
+                  <span className="inline-block text-sage-dark text-sm font-medium tracking-wide uppercase mb-3">Conditions</span>
+                  <h2 className="text-xl md:text-2xl font-bold text-charcoal mb-2">
+                    Explore common skin conditions
+                  </h2>
+                  <p className="text-muted-foreground">
+                    Recognize symptoms and understand what causes your skin issues.
+                  </p>
+                </div>
+                <a href="/dermatology" className="inline-flex items-center gap-2 mt-4 bg-charcoal text-white px-5 py-2.5 rounded-lg font-medium hover:bg-charcoal/90 transition-colors w-fit">
+                  Learn
+                </a>
+              </div>
+
+              {/* Appointments Card */}
+              <div className="bg-teal/10 rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-[280px]">
+                <div>
+                  <span className="inline-block text-teal text-sm font-medium tracking-wide uppercase mb-3">Appointments</span>
+                  <h2 className="text-xl md:text-2xl font-bold text-charcoal mb-2">
+                    Book a telehealth appointment
+                  </h2>
+                  <p className="text-muted-foreground">
+                    Talk directly with a doctor for advice tailored to your skin.
+                  </p>
+                </div>
+                <a href="/contact" className="inline-flex items-center gap-2 mt-4 bg-teal text-white px-5 py-2.5 rounded-lg font-medium hover:bg-teal/90 transition-colors w-fit">
+                  Consult
+                </a>
+              </div>
+
+              {/* Personalized Treatment Card */}
+              <div className="lg:col-span-2 bg-warm/20 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between min-h-[200px] gap-6">
+                <div>
+                  <h2 className="text-xl md:text-2xl font-bold text-charcoal mb-2">
+                    Get personalized treatment plans
+                  </h2>
+                  <p className="text-muted-foreground">
+                    Receive recommendations based on your specific skin condition.
+                  </p>
+                </div>
+                <a href="/contact" className="inline-flex items-center gap-2 bg-warm text-charcoal px-5 py-2.5 rounded-lg font-medium hover:bg-warm/80 transition-colors w-fit shrink-0">
+                  Start
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Introduction */}
-        <section className="py-12 md:py-16">
+        {/* Trust Section */}
+        <section className="py-12 md:py-16 border-t border-border">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <Card className="border-sage/20 bg-sage-light/10">
-                <CardContent className="p-6 md:p-8">
-                  <h2 className="text-2xl font-semibold text-charcoal mb-4">Skin Care as Part of Skin Health</h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    Daily skin care supports your skin barrier, reduces inflammation, and improves treatment tolerance. 
-                    Understand your ingredients—not brands or marketing. 
-                    Use this guide to make evidence-based decisions with your dermatologist.
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+              <div>
+                <h2 className="text-2xl md:text-3xl font-bold text-charcoal mb-4">
+                  Medical expertise meets patient education
+                </h2>
+                <p className="text-muted-foreground text-lg">
+                  A doctor built this site to teach you the truth about skin. No marketing hype, just solid dermatology.
+                </p>
+              </div>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-sage mt-2 shrink-0" />
+                  <span className="text-foreground">Evidence-based information you can trust</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-sage mt-2 shrink-0" />
+                  <span className="text-foreground">Real solutions for real skin problems</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-sage mt-2 shrink-0" />
+                  <span className="text-foreground">Direct access to medical guidance</span>
+                </li>
+              </ul>
             </div>
           </div>
         </section>
