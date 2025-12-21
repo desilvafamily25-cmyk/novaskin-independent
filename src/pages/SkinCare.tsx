@@ -352,18 +352,11 @@ const SkinCare = () => {
               <Card className="border-sage/20 bg-sage-light/10">
                 <CardContent className="p-6 md:p-8">
                   <h2 className="text-2xl font-semibold text-charcoal mb-4">Skin Care as Part of Skin Health</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Skin care plays an important role in maintaining the health and function of the skin. While medical treatments address specific dermatologic conditions and skin cancers, daily skin care practices can support the skin barrier, reduce inflammation, and improve treatment tolerance.
+                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                    Daily skin care supports your skin barrier, reduces inflammation, and improves treatment tolerance. 
+                    Understand your ingredients—not brands or marketing. 
+                    Use this guide to make evidence-based decisions with your dermatologist.
                   </p>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    This page is designed to provide evidence-based education about commonly used skin care ingredients. It is not intended to promote specific products or replace individualized medical advice. Skin type, underlying conditions, and concurrent treatments should always be considered when selecting skin care ingredients.
-                  </p>
-                  <div className="bg-white/50 rounded-lg p-4 mt-6">
-                    <h3 className="font-medium text-charcoal mb-2">How to Use This Guide</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Skin care products are best understood by their active ingredients, rather than by brand or marketing claims. Below, ingredients are grouped by their primary dermatologic function, with guidance on who may benefit, potential side effects, and when professional supervision is recommended.
-                    </p>
-                  </div>
                 </CardContent>
               </Card>
             </div>

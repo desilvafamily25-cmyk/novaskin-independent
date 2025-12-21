@@ -1,11 +1,21 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { useState } from "react";
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 
 const Navigation = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -14,6 +24,15 @@ const Navigation = () => {
     { name: "Skin Care", path: "/skin-care" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
+  ];
+
+  const searchItems = [
+    { name: "Home", path: "/", keywords: ["home", "welcome", "main"] },
+    { name: "Skin Cancer Checks", path: "/skin-checks", keywords: ["skin cancer", "mole", "melanoma", "check", "screening", "dermoscopy"] },
+    { name: "Dermatology", path: "/dermatology", keywords: ["dermatology", "skin conditions", "eczema", "psoriasis", "acne", "rash"] },
+    { name: "Skin Care", path: "/skin-care", keywords: ["skincare", "ingredients", "retinoid", "moisturizer", "sunscreen", "acid", "vitamin c", "niacinamide"] },
+    { name: "About Dr. Premila", path: "/about", keywords: ["about", "doctor", "dermatologist", "qualifications", "experience"] },
+    { name: "Contact & Booking", path: "/contact", keywords: ["contact", "book", "appointment", "phone", "email", "location"] },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -45,12 +64,44 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
+          {/* Search & CTA Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              onClick={() => setSearchOpen(true)}
+              aria-label="Search"
+              className="hover:bg-sage-light"
+            >
+              <Search className="h-5 w-5" />
+            </Button>
             <Button variant="cta" asChild>
               <Link to="/contact">Book Now</Link>
             </Button>
           </div>
+
+          {/* Search Dialog */}
+          <CommandDialog open={searchOpen} onOpenChange={setSearchOpen}>
+            <CommandInput placeholder="Search pages, topics, ingredients..." />
+            <CommandList>
+              <CommandEmpty>No results found.</CommandEmpty>
+              <CommandGroup heading="Pages">
+                {searchItems.map((item) => (
+                  <CommandItem
+                    key={item.path}
+                    onSelect={() => {
+                      navigate(item.path);
+                      setSearchOpen(false);
+                    }}
+                    className="cursor-pointer"
+                  >
+                    <Search className="mr-2 h-4 w-4" />
+                    {item.name}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </CommandDialog>
 
           {/* Mobile Menu Button */}
           <button
@@ -70,6 +121,17 @@ const Navigation = () => {
         {mobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-border pt-4">
             <div className="flex flex-col gap-4">
+              {/* Mobile Search */}
+              <button
+                onClick={() => {
+                  setSearchOpen(true);
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Search className="h-4 w-4" />
+                Search...
+              </button>
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
