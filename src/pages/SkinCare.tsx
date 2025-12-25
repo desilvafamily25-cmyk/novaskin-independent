@@ -7,7 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Shield, Droplets, Sun, Sparkles, AlertCircle, Heart, Leaf, FlaskConical, Info, ChevronRight, ArrowRight, BookOpen, Stethoscope, Calendar, Box } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import skincareHero from "@/assets/skincare-hero.jpg";
+import skinConsultation from "@/assets/skin-consultation.jpg";
 
 // Detailed ingredient data
 const ingredientDetails: Record<string, {
@@ -363,51 +363,55 @@ const SkinCare = () => {
       <Navigation />
       
       <main>
-        {/* Hero Section 1: Doctor-led */}
-        <section className="bg-warm/30 py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-              <div className="max-w-xl">
-                <span className="inline-block text-charcoal font-semibold text-sm tracking-wide uppercase mb-4">
-                  Doctor-led
-                </span>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal leading-tight mb-6">
-                  Medical expertise meets patient education
-                </h1>
-                <p className="text-lg text-muted-foreground mb-6">
-                  A doctor built this site to teach you the truth about skin. No marketing hype, just solid dermatology.
-                </p>
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-charcoal mt-2.5 shrink-0" />
-                    <span className="text-foreground">Evidence-based information you can trust</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-charcoal mt-2.5 shrink-0" />
-                    <span className="text-foreground">Real solutions for real skin problems</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-charcoal mt-2.5 shrink-0" />
-                    <span className="text-foreground">Direct access to medical guidance</span>
-                  </li>
-                </ul>
-                <div className="flex items-center gap-4">
-                  <Button asChild className="bg-charcoal text-white hover:bg-charcoal/90">
-                    <a href="#ingredients">Learn</a>
-                  </Button>
-                  <a href="/dermatology" className="inline-flex items-center gap-2 text-charcoal font-medium hover:gap-3 transition-all">
-                    More <ChevronRight className="w-4 h-4" />
-                  </a>
-                </div>
-              </div>
-              <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-warm/50">
-                  <img 
-                    src={skincareHero} 
-                    alt="Professional skincare treatment in a medical clinic" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+        {/* Hero Section */}
+        <section className="relative min-h-[600px] flex items-center">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${skinConsultation})` }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 to-white/70" />
+          </div>
+          
+          <div className="container mx-auto px-4 relative z-10 py-16">
+            <div className="max-w-2xl">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-4">
+                Skin Care Consultations
+              </h1>
+              <p className="text-2xl text-sage-dark font-medium mb-6">
+                with Dr Premila Hewage
+              </p>
+              <p className="text-lg text-foreground mb-6">
+                Medical assessment of skin concerns with personalised care. Dr Premila Hewage provides individual medical skin assessments, considering skin type, current symptoms, and relevant medical factors.
+              </p>
+              <p className="text-foreground mb-4 font-medium">Consultations may include:</p>
+              <ul className="space-y-2 mb-8">
+                <li className="flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sage-dark mt-2.5 shrink-0" />
+                  <span className="text-foreground">Diagnosis of the underlying skin condition</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sage-dark mt-2.5 shrink-0" />
+                  <span className="text-foreground">Personalised skin care recommendations</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sage-dark mt-2.5 shrink-0" />
+                  <span className="text-foreground">Prescription medications (when clinically indicated)</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sage-dark mt-2.5 shrink-0" />
+                  <span className="text-foreground">Clear guidance for ongoing skin management</span>
+                </li>
+              </ul>
+              <p className="text-sm text-muted-foreground italic mb-8">
+                This service is focused on the medical management of skin conditions, not cosmetic trends or generic routines.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button variant="cta" size="lg" asChild>
+                  <Link to="/contact">Book Consultation</Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <a href="#ingredients">Explore Ingredients</a>
+                </Button>
               </div>
             </div>
           </div>

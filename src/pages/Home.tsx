@@ -38,6 +38,13 @@ const Home = () => {
                 <Link to="/skin-checks">Learn More</Link>
               </Button>
             </div>
+            <div className="mt-6">
+              <Button variant="secondary" size="sm" asChild>
+                <a href="https://novacompounding.netlify.app/" target="_blank" rel="noopener noreferrer">
+                  Compounding Ideas (Prescribers only)
+                </a>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
