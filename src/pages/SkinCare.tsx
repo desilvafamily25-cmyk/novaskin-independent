@@ -480,7 +480,7 @@ const SkinCare = () => {
                     Get a treatment plan from a doctor
                   </h3>
                   <p className="text-white/70">
-                    Schedule a telehealth visit for personalized medical guidance.
+                    Schedule a telehealth visit for personalised medical guidance.
                   </p>
                 </div>
                 <Link to="/contact" className="inline-flex items-center gap-2 text-white/80 font-medium hover:text-white hover:gap-3 transition-all mt-6">

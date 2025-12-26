@@ -220,7 +220,7 @@ const SkinChecks = () => {
                 <AccordionContent>
                   For most people, an annual skin check is recommended. However, if you have a 
                   history of skin cancer, many moles, or other risk factors, more frequent checks 
-                  (every 3-6 months) may be advised. Dr Hewage will provide personalized recommendations 
+                  (every 3-6 months) may be advised. Dr Hewage will provide personalised recommendations 
                   based on your individual risk profile.
                 </AccordionContent>
               </AccordionItem>
@@ -228,7 +228,7 @@ const SkinChecks = () => {
               <AccordionItem value="item-2">
                 <AccordionTrigger>What is dermoscopy?</AccordionTrigger>
                 <AccordionContent>
-                  Dermoscopy is a non-invasive technique that uses a specialized magnifying device 
+                  Dermoscopy is a non-invasive technique that uses a specialised magnifying device 
                   to examine skin lesions in detail. It allows the doctor to see structures beneath 
                   the skin's surface that aren't visible to the naked eye, improving diagnostic accuracy 
                   for skin cancer detection.
