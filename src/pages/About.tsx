@@ -44,8 +44,8 @@ const About = () => {
                 </h2>
                 <p className="text-lg text-foreground mb-4">
                   Dr Premila Hewage is a qualified General Practitioner (MBBS FRACGP) with 
-                  specialized training in dermoscopy and skin cancer medicine. She brings a 
-                  wealth of experience and a patient-centered approach to skin health care.
+                  specialised training in dermoscopy and skin cancer medicine. She brings a 
+                  wealth of experience and a patient-centred approach to skin health care.
                 </p>
                 <p className="text-lg text-foreground mb-4">
                   Passionate about early detection and prevention of skin cancer, Dr Hewage 
@@ -101,7 +101,7 @@ const About = () => {
                     <li className="flex items-start gap-2">
                       <span className="text-sage-dark mt-1">•</span>
                       <span className="text-foreground">
-                        Specialized training in <strong>skin cancer medicine</strong>
+                        Specialised training in <strong>skin cancer medicine</strong>
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
@@ -132,10 +132,10 @@ const About = () => {
                   <Heart className="h-8 w-8 text-charcoal" />
                 </div>
                 <h3 className="text-xl font-semibold text-charcoal mb-3">
-                  Patient-Centered
+                  Patient-Centred
                 </h3>
                 <p className="text-muted-foreground">
-                  Every patient receives personalized care with time to discuss 
+                  Every patient receives personalised care with time to discuss 
                   concerns and ask questions
                 </p>
               </div>

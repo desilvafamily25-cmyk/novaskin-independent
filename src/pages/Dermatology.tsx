@@ -331,7 +331,7 @@ const Dermatology = () => {
             </h1>
             <p className="text-xl text-foreground">
               Comprehensive management of common skin conditions with 
-              evidence-based treatments and personalized care
+              evidence-based treatments and personalised care
             </p>
           </div>
         </div>
@@ -459,7 +459,7 @@ const Dermatology = () => {
                   <span className="text-2xl font-bold text-charcoal">2</span>
                 </div>
                 <h3 className="text-xl font-semibold text-charcoal mb-3">
-                  Personalized Treatment
+                  Personalised Treatment
                 </h3>
                 <p className="text-muted-foreground">
                   Evidence-based treatment plans tailored to your specific needs

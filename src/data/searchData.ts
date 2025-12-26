@@ -12,7 +12,7 @@ export const searchData: SearchItem[] = [
   { name: "Skin Cancer Checks", path: "/skin-checks", category: "Pages", keywords: ["skin cancer", "screening", "check", "mole check"] },
   { name: "Dermatology Services", path: "/dermatology", category: "Pages", keywords: ["dermatology", "skin conditions", "treatment"] },
   { name: "Skin Care Guide", path: "/skin-care", category: "Pages", keywords: ["skincare", "ingredients", "guide", "education"] },
-  { name: "About Dr. Premila", path: "/about", category: "Pages", keywords: ["about", "doctor", "dermatologist", "dr premila", "hewage"] },
+  { name: "About Dr Premila", path: "/about", category: "Pages", keywords: ["about", "doctor", "dermatologist", "dr premila", "hewage"] },
   { name: "Contact & Booking", path: "/contact", category: "Pages", keywords: ["contact", "book", "appointment", "phone", "email", "location"] },
 
   // Skin Cancer & Screening

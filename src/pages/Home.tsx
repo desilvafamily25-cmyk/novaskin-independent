@@ -155,7 +155,7 @@ const Home = () => {
                 Expert Training
               </h3>
               <p className="text-muted-foreground">
-                Specialized training in dermoscopy and skin cancer medicine
+                Specialised training in dermoscopy and skin cancer medicine
               </p>
             </div>
 
@@ -215,12 +215,12 @@ const Home = () => {
               </h2>
               <p className="text-lg text-foreground mb-6">
                 Dr Premila Hewage is a qualified General Practitioner (MBBS FRACGP) with 
-                specialized training in dermoscopy and skin cancer medicine. She is passionate 
+                specialised training in dermoscopy and skin cancer medicine. She is passionate 
                 about early detection and prevention of skin cancer.
               </p>
               <p className="text-lg text-foreground mb-8">
-                With extensive experience in dermatology and a commitment to patient-centered 
-                care, Dr Hewage provides thorough skin examinations and personalized treatment plans.
+                With extensive experience in dermatology and a commitment to patient-centred 
+                care, Dr Hewage provides thorough skin examinations and personalised treatment plans.
               </p>
               <Button variant="outline" size="lg" asChild>
                 <Link to="/about">Learn More About Dr Premila</Link>
